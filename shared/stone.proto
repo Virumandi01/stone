@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package stone;
+
+// The core service handling the 47-second MPC execution window
+service SovereignExecution {
+  // Phase 1: Initiates the 47-second countdown and exchanges S2 lock hashes
+  rpc InitiateSequence (SequenceRequest) returns (SequenceResponse);
+
+  // Phase 2 (Optional): The Sovereign Override. User manually kills the transaction
+  rpc AbortSequence (AbortRequest) returns (AbortResponse);
+
+  // Phase 3: The Final Execution. Submits the G1 Payload Key if not aborted
+  rpc SubmitPayloadKey (PayloadRequest) returns (PayloadResponse);
+}
+
+// ---------------------------------------------------------
+// Message Definitions (The Data Packets)
+// ---------------------------------------------------------
+
+message SequenceRequest {
+  string task_id = 1;         // Unique ID from the AI Agent
+  string target_address = 2;  // Where the AI wants to send funds/data
+  string amount = 3;          // How much is being moved
+  string s2_mac_hash = 4;     // Mac's half of the Authorization Lock (Tier 1)
+}
+
+message SequenceResponse {
+  string sequence_id = 1;     // The Vault's tracking ID for this transaction
+  string s2_vm_hash = 2;      // VM's half of the Authorization Lock (Tier 1)
+  int64 expires_at = 3;       // Unix timestamp exactly 47 seconds from creation
+}
+
+message AbortRequest {
+  string sequence_id = 1;
+  string reason = 2;          // e.g., "SOVEREIGN_USER_OVERRIDE"
+}
+
+message AbortResponse {
+  bool success = 1;
+  string message = 2;         // e.g., "Sequence mathematically destroyed."
+}
+
+message PayloadRequest {
+  string sequence_id = 1;
+  string g1_mac_key = 2;      // The Mac's encrypted payload key (Tier 2)
+}
+
+message PayloadResponse {
+  bool success = 1;
+  string zero_g_tx_hash = 2;  // The final ZK-Proof submitted to 0G Storage
+  string error_message = 3;   // Will trigger if timer > 47 seconds
+}
