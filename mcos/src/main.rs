@@ -22,7 +22,7 @@ fn generate_ephemeral_key() -> String {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // ⚠️ REPLACE THIS WITH YOUR GCP VM'S EXTERNAL IP ADDRESS ⚠️
-    let vm_url = "35.200.222.202:50051";
+    let vm_url = "http://35.200.222.202:50051";
 
     println!("🛡️ HUDY TECH Sovereign Warden: ONLINE");
     println!("Attempting to connect to Cloud Vault at {}...", vm_url);
