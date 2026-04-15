@@ -65,7 +65,7 @@ impl SovereignExecution for StoneVault {
             error_message: "".into(),
         }))
     }
-}
+
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
