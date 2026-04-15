@@ -40,7 +40,7 @@ async fn push_to_0g_storage(mac_key: &str) -> String {
     // We send this to the 0G Testnet (Newton)
     // We add a 5-second timeout so a lagging testnet doesn't freeze your demo
     let res = client
-        .post("https://rpc-testnet.0g.ai")
+        .post("https://evmrpc-testnet.0g.ai")
         .timeout(std::time::Duration::from_secs(5))
         .json(&payload)
         .send()
