@@ -1,0 +1,1 @@
+/Users/mac_dappa/Desktop/stone/mcos/target/debug/mcos_warden: /Users/mac_dappa/Desktop/stone/mcos/../shared /Users/mac_dappa/Desktop/stone/mcos/../shared/stone.proto /Users/mac_dappa/Desktop/stone/mcos/build.rs /Users/mac_dappa/Desktop/stone/mcos/src/main.rs /Users/mac_dappa/Desktop/stone/mcos/target/debug/build/mcos_warden-b8e79cae50169a2b/out/stone.rs
