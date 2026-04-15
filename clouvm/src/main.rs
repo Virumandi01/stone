@@ -1,6 +1,6 @@
 use tonic::{transport::Server, Request, Response, Status};
 use stone_proto::sovereign_execution_server::{SovereignExecution, SovereignExecutionServer};
-use stone_proto::{SequenceRequest, SequenceResponse, AbortRequest, AbortResponse, PayloadRequest, PayloadRespo>
+use stone_proto::{SequenceRequest, SequenceResponse, AbortRequest, AbortResponse, PayloadRequest, PayloadResponse};
 use std::time::{SystemTime, UNIX_EPOCH};
 use sha2::{Sha256, Digest};
 use rand::Rng;
