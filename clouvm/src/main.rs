@@ -34,7 +34,7 @@ impl SovereignExecution for StoneVault {
         let now = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs();
         let expires_at = (now + 47) as i64;
 
-         println!("🔒 Generated VM S2 Lock: {}", &s2_vm_hash[0..16]);
+        println!("🔒 Generated VM S2 Lock: {}", &s2_vm_hash[0..16]);
         println!("⏳ Starting 47-second MPC window. Waiting for payload...");
 
         let reply = SequenceResponse {
@@ -52,7 +52,7 @@ impl SovereignExecution for StoneVault {
         Ok(Response::new(AbortResponse { success: true, message: "Sequence destroyed.".into() }))
     }
 
-    async fn submit_payload_key(&self, request: Request<PayloadRequest>) -> Result<Response<PayloadResponse>, >
+    async fn submit_payload_key(&self, request: Request<PayloadRequest>) -> Result<Response<PayloadResponse>, Status> {
         let req = request.into_inner();
         println!("🔓 [NETWORK] Received Mac G1 Payload Key: {}", &req.g1_mac_key[0..16]);
         println!("⚙️ Combining MPC Keys in Intel TDX Enclave...");
@@ -65,7 +65,7 @@ impl SovereignExecution for StoneVault {
             error_message: "".into(),
         }))
     }
-
+}
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
