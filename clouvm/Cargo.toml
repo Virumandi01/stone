@@ -1,0 +1,17 @@
+[package]
+name = "clouvm_vault"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tonic = "0.10"
+prost = "0.12"
+tokio = { version = "1.0", features = ["macros", "rt-multi-thread"] }
+sha2 = "0.10"
+rand = "0.8"
+hex = "0.4"
+chrono = "0.4" # For calculating the exact 47-second Unix timestamp
+
+[build-dependencies]
+tonic-build = "0.10"
+
